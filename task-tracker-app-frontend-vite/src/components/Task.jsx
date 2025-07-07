@@ -52,8 +52,6 @@ const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
 						<Button
 							type="delete"
 							onClick={() => {
-								console.log(task.text);
-
 								deleteTask(task.id);
 							}}
 							isCompleted={task.completed}

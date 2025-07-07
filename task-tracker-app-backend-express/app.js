@@ -30,8 +30,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/tasks", (req, res) => {
-	console.log(tasks);
-
 	res.json(tasks);
 });
 
@@ -42,6 +40,9 @@ app.post("/api/tasks", (req, res) => {
 		text: req.body.text,
 		completed: false,
 	};
+
+	console.log(newTask);
+
 	tasks.push(newTask);
 
 	res.status(201).json(newTask);

@@ -6,6 +6,7 @@ import TaskList from "./components/TaskList";
 import { fetchTasks, addTasks, updateTasks, deleteTasks } from "./api/task";
 
 import { useEffect, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 function App() {
 	const [tasks, setTasks] = useState([]);
@@ -50,13 +51,13 @@ function App() {
 				.then((task) => {
 					setTasks((prevTasks) => [...prevTasks, task]);
 				})
-				.catch((error) => {
-					setError("Failed to add task: " + error.message);
+				.catch(() => {
+					setError("Failed to add task");
 				});
 
 			setNewTask("");
 		} else {
-			alert("Task cannot be empty");
+			setError("Task cannot be empty");
 		}
 	};
 
@@ -72,12 +73,12 @@ function App() {
 		const taskToDelete = tasks.find((task) => task.id === id);
 
 		if (!taskToDelete) {
-			alert("Task not found");
+			setError("Task not found");
 			return;
 		}
 
 		if (!taskToDelete.completed) {
-			alert("Cannot delete without completing task");
+			setError("Cannot delete without completing task");
 			return;
 		}
 
@@ -86,7 +87,7 @@ function App() {
 				setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
 			})
 			.catch((error) => {
-				setError("Failed to delete task: " + error.message);
+				setError("Failed to delete task");
 			});
 	};
 
@@ -99,13 +100,12 @@ function App() {
 					)
 				);
 			})
-			.catch((error) => {
-				setError("Failed to update task: " + error.message);
+			.catch(() => {
+				setError("Failed to update task");
 			});
 	};
 
 	if (loading) return <p className="text-gray-700 p-4">Loading tasks...</p>;
-	if (error) return <p className="text-red-500 p-4">Error: {error}</p>;
 
 	return (
 		<div className="w-full h-screen flex flex-col">
@@ -117,9 +117,12 @@ function App() {
 					</div>
 				)}
 
-				{welcomeMessage && (
-					<div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4">
-						<p>{welcomeMessage}</p>
+				{error && (
+					<div className="flex items-center justify-between bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+						<p>{error}</p>
+						<button onClick={() => setError(null)}>
+							<RxCross2 />
+						</button>
 					</div>
 				)}
 				<h2 className="text-xl font-bold mb-4 text-gray-800">Dashboard</h2>
