@@ -1,12 +1,10 @@
-import Header from "./components/Header";
 import Button from "./components/Button";
-import Footer from "./components/Footer";
 import Input from "./components/Input";
 import TaskList from "./components/TaskList";
 import { fetchTasks, addTasks, updateTasks, deleteTasks } from "./api/task";
-
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
 	const [tasks, setTasks] = useState([]);
@@ -14,6 +12,7 @@ function App() {
 	const [welcomeMessage, setWelcomeMessage] = useState("");
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const { isLogin } = useAuth();
 
 	useEffect(() => {
 		const initializeApp = async () => {
@@ -22,6 +21,7 @@ function App() {
 				setTasks(fetchAllTasks);
 				setWelcomeMessage("Welcome to your task tracker!");
 				const timer = setTimeout(() => setWelcomeMessage(""), 3000);
+
 				return () => clearTimeout(timer);
 			} catch (error) {
 				setError(error);
@@ -108,49 +108,53 @@ function App() {
 	if (loading) return <p className="text-gray-700 p-4">Loading tasks...</p>;
 
 	return (
-		<div className="w-full h-screen flex flex-col">
-			<Header />
-			<main className="container mx-auto my-8 flex-grow p-4">
-				{welcomeMessage && (
-					<div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4">
-						<p>{welcomeMessage}</p>
+		<>
+			{isLogin ? (
+				<main className="container mx-auto my-8 flex-grow p-4">
+					{welcomeMessage && (
+						<div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4">
+							<p>{welcomeMessage}</p>
+						</div>
+					)}
+
+					{error && (
+						<div className="flex items-center justify-between bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+							<p>{error}</p>
+							<button onClick={() => setError(null)}>
+								<RxCross2 />
+							</button>
+						</div>
+					)}
+					<h2 className="text-xl font-bold mb-4 text-gray-800">Dashboard</h2>
+
+					<div className="flex space-x-4 mb-5">
+						<Input
+							className={"flex-grow"}
+							setNewTask={setNewTask}
+							newTask={newTask}
+						/>
+						<Button
+							type="add"
+							onClick={() => {
+								addTask();
+							}}
+						/>
+						{/* <Button type="delete" onClick={() => alert("Task Delete")} /> */}
 					</div>
-				)}
 
-				{error && (
-					<div className="flex items-center justify-between bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
-						<p>{error}</p>
-						<button onClick={() => setError(null)}>
-							<RxCross2 />
-						</button>
-					</div>
-				)}
-				<h2 className="text-xl font-bold mb-4 text-gray-800">Dashboard</h2>
-
-				<div className="flex space-x-4 mb-5">
-					<Input
-						className={"flex-grow"}
-						setNewTask={setNewTask}
-						newTask={newTask}
+					<TaskList
+						tasks={tasks}
+						onToggleComplete={onToggleComplete}
+						deleteTask={deleteTask}
+						updateTask={updateTask}
 					/>
-					<Button
-						type="add"
-						onClick={() => {
-							addTask();
-						}}
-					/>
-					{/* <Button type="delete" onClick={() => alert("Task Delete")} /> */}
-				</div>
-
-				<TaskList
-					tasks={tasks}
-					onToggleComplete={onToggleComplete}
-					deleteTask={deleteTask}
-					updateTask={updateTask}
-				/>
-			</main>
-			<Footer />
-		</div>
+				</main>
+			) : (
+				<p className="container mx-auto py-8 flex-grow text-gray-700 text-xl">
+					Please login to see and add task
+				</p>
+			)}
+		</>
 	);
 }
 

@@ -23,6 +23,7 @@ const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
 				/>
 
 				<input
+					id={`input-${task.id}`}
 					type="text"
 					value={updatedTask}
 					onChange={(e) => setUpdatedTask(e.target.value)}
