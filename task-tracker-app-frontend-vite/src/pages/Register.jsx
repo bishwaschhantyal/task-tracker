@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { registerUser } from "../api/auth";
+import { registerUser, googleLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Error from "../components/Error";
@@ -168,6 +168,7 @@ const RegisterForm = () => {
 						onClick={() => {
 							// You can trigger Google login here
 							console.log("Google Login Triggered");
+							googleLogin();
 						}}>
 						<FcGoogle className="text-xl mr-2" />
 						<span className="text-gray-700 font-medium">

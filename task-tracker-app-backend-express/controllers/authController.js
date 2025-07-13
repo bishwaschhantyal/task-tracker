@@ -53,5 +53,5 @@ exports.logoutUser = (req, res) => {
 exports.googleCallback = (req, res) => {
 	const user = req.user;
 	const token = generateToken(user);
-	res.redirect(`http://localhost:5173/?token=${token}`);
+	res.redirect(`http://localhost:5173/auth/success?token=${token}`);
 };

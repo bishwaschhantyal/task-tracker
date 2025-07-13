@@ -1,13 +1,23 @@
 const API_URL = "http://localhost:5000/api/tasks";
 
-export const fetchTasks = async () => {
+export const fetchTasks = async (setIsLogin) => {
 	const response = await fetch(API_URL, {
 		method: "GET",
 		headers: {
+			"Content-Type": "application/json",
 			Authorization: `Bearer ${localStorage.getItem("token")}`,
 		},
 	});
-	if (!response.ok) throw new Error("Failed to fetch tasks");
+
+	// Handle 401/403 responses
+	if (response.status === 401 || response.status === 403) {
+		localStorage.removeItem("token");
+		if (typeof setIsLogin === "function") {
+			setIsLogin(false);
+		}
+		return { error: "Token expired or unauthorized" };
+	}
+
 	return await response.json();
 };
 

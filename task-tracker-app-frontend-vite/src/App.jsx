@@ -12,13 +12,19 @@ function App() {
 	const [welcomeMessage, setWelcomeMessage] = useState("");
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const { isLogin } = useAuth();
+	const { isLogin, setIsLogin } = useAuth();
 
 	useEffect(() => {
 		const initializeApp = async () => {
 			try {
-				const fetchAllTasks = await fetchTasks();
-				setTasks(fetchAllTasks);
+				const response = await fetchTasks(setIsLogin);
+
+				if (response?.error) {
+					setError(response.error);
+					return;
+				}
+
+				setTasks(response);
 				setWelcomeMessage("Welcome to your task tracker!");
 				const timer = setTimeout(() => setWelcomeMessage(""), 3000);
 

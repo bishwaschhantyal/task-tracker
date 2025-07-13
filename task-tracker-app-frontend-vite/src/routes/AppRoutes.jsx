@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout";
 import LoginForm from "../pages/Login";
 import RegisterForm from "../pages/Register";
 import ProtectRoute from "./ProtectRoute";
+import AuthSuccessPage from "../components/AuthSuccessPage";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -25,6 +26,11 @@ export const router = createBrowserRouter(
 			<Route
 				path="/signup"
 				element={<RegisterForm />}
+			/>
+
+			<Route
+				path="/auth/success"
+				element={<AuthSuccessPage />}
 			/>
 		</Route>
 	)

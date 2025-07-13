@@ -12,9 +12,11 @@ passport.use(
 		},
 		(accessToken, refreshToken, profile, done) => {
 			let user = users.find((u) => u.email === profile.emails[0].value);
+
 			if (!user) {
 				user = {
 					id: String(users.length + 1),
+					user: profile.displayName,
 					email: profile.emails[0].value,
 					password: bcrypt.hashSync("google-auth", 10),
 					role: "user",
