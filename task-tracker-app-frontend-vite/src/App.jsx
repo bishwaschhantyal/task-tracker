@@ -1,7 +1,13 @@
 import Button from "./components/Button";
 import Input from "./components/Input";
 import TaskList from "./components/TaskList";
-import { fetchTasks, addTasks, updateTasks, deleteTasks } from "./api/task";
+import {
+	fetchTasks,
+	addTasks,
+	updateTasks,
+	deleteTasks,
+	onToggle,
+} from "./api/task";
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useAuth } from "./contexts/AuthContext";
@@ -19,8 +25,9 @@ function App() {
 			try {
 				const response = await fetchTasks(setIsLogin);
 
-				if (response?.error) {
+				if (response.error) {
 					setError(response.error);
+					console.log(response.error);
 					return;
 				}
 
@@ -67,14 +74,6 @@ function App() {
 		}
 	};
 
-	const onToggleComplete = (id) => {
-		setTasks(
-			tasks.map((task) =>
-				task.id === id ? { ...task, completed: !task.completed } : task
-			)
-		);
-	};
-
 	const deleteTask = (id) => {
 		const taskToDelete = tasks.find((task) => task.id === id);
 
@@ -111,6 +110,20 @@ function App() {
 			});
 	};
 
+	const onToggleComplete = (id) => {
+		onToggle(id)
+			.then(() => {
+				setTasks((prevTasks) =>
+					prevTasks.map((task) =>
+						task.id === id ? { ...task, completed: !task.completed } : task
+					)
+				);
+			})
+			.catch(() => {
+				setError("Failed to delete task");
+			});
+	};
+
 	if (loading) return <p className="text-gray-700 p-4">Loading tasks...</p>;
 
 	return (
@@ -131,6 +144,7 @@ function App() {
 							</button>
 						</div>
 					)}
+
 					<h2 className="text-xl font-bold mb-4 text-gray-800">Dashboard</h2>
 
 					<div className="flex space-x-4 mb-5">

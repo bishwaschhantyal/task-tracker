@@ -8,12 +8,10 @@ const Header = () => {
 
 	const handleLogout = async () => {
 		try {
-			const response = await logoutUser();
+			await logoutUser();
 			localStorage.removeItem("token");
 			setIsLogin((prev) => !prev);
 			navigate("/login");
-
-			console.log(response);
 		} catch (error) {
 			console.error("Logout failed");
 		}
