@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
 	return (
-		<div className="w-full h-screen flex flex-col font-poppins">
+		<div className="w-full h-screen flex flex-col font-poppins dark:bg-gray-800">
 			<Header />
 			<Outlet />
 			<Footer />

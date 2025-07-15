@@ -145,7 +145,9 @@ function App() {
 						</div>
 					)}
 
-					<h2 className="text-xl font-bold mb-4 text-gray-800">Dashboard</h2>
+					<h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-300">
+						Dashboard
+					</h2>
 
 					<div className="flex space-x-4 mb-5">
 						<Input
@@ -170,7 +172,7 @@ function App() {
 					/>
 				</main>
 			) : (
-				<p className="container mx-auto py-8 flex-grow text-gray-700 text-xl">
+				<p className="container mx-auto py-8 flex-grow text-gray-700 text-xl dark:text-gray-500">
 					Please login to see and add task
 				</p>
 			)}

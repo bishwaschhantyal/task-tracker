@@ -40,12 +40,12 @@ const RegisterForm = () => {
 	};
 
 	return (
-		<div className="flex items-center justify-center flex-grow bg-gray-100">
+		<div className="flex items-center justify-center flex-grow">
 			<Error message={serverError} />
 
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-gray-800 text-white p-8 rounded-xl shadow-md w-full max-w-md">
+				className="dark:bg-gray-800 dark:text-white p-8 rounded-xl shadow-lg w-full max-w-md border dark:border-gray-600 border-gray-100">
 				<h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
 				<div className="mb-4">
 					<label
@@ -136,7 +136,7 @@ const RegisterForm = () => {
 
 							<label
 								htmlFor="passwordVisibility"
-								className="text-sm text-gray-300">
+								className="text-sm dark:text-gray-300">
 								show password
 							</label>
 						</div>

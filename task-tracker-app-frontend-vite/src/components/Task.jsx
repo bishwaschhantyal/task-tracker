@@ -13,7 +13,7 @@ const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
 		<li
 			key={task.id}
 			className="py-3 flex items-center justify-between">
-			<div className="flex items-center flex-grow">
+			<div className="flex items-center flex-grow dark:text-white">
 				<input
 					id={`checkbox-${task.id}`}
 					type="checkbox"

@@ -4,3 +4,5 @@
 @theme {
 	--font-poppins: "Poppins";
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

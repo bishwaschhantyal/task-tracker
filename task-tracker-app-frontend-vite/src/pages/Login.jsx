@@ -39,11 +39,11 @@ const LoginForm = () => {
 	};
 
 	return (
-		<div className="flex items-center justify-center flex-grow bg-gray-100">
+		<div className="flex items-center justify-center flex-grow">
 			<Error message={serverError} />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-gray-800 text-white p-8 rounded-xl shadow-md w-full max-w-md">
+				className="dark:bg-gray-800 dark:text-white p-8 rounded-xl shadow-xl w-full max-w-md border dark:border-gray-600 border-gray-100">
 				<h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
 
 				<div className="mb-4">
@@ -63,8 +63,10 @@ const LoginForm = () => {
 								message: "Invalid email address",
 							},
 						})}
-						className={`w-full p-3 rounded-lg border outline-none ${
-							errors.email ? "border-red-500" : "border-gray-300"
+						className={`w-full p-3 rounded-lg border  outline-none ${
+							errors.email
+								? "border-red-500"
+								: "dark:border-gray-300 border-gray-400"
 						}`}
 					/>
 					{errors.email && (
@@ -89,7 +91,9 @@ const LoginForm = () => {
 							},
 						})}
 						className={`w-full p-3 rounded-lg border outline-none ${
-							errors.password ? "border-red-500" : "border-gray-300"
+							errors.password
+								? "border-red-500"
+								: "dark:border-gray-300 border-gray-400"
 						}`}
 					/>
 					{errors.password && (
@@ -104,12 +108,12 @@ const LoginForm = () => {
 								name="passwordVisibility"
 								id="passwordVisibility"
 								onChange={() => setShowPassword(!showPassword)}
-								className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+								className="h-4 w-4 text-green-600 focus:ring-green-500 dark:border-gray-300 rounded"
 							/>
 
 							<label
 								htmlFor="passwordVisibility"
-								className="text-sm text-gray-300">
+								className="text-sm dark:text-gray-300">
 								show password
 							</label>
 						</div>
@@ -129,9 +133,9 @@ const LoginForm = () => {
 				</button>
 
 				<div className="flex items-center my-6">
-					<hr className="flex-grow border-t border-gray-300" />
+					<hr className="flex-grow border-t dark:border-gray-300 border-gray-400" />
 					<span className="mx-4 text-gray-500">OR</span>
-					<hr className="flex-grow border-t border-gray-300" />
+					<hr className="flex-grow border-t dark:border-gray-300 border-gray-400" />
 				</div>
 
 				<div className="mt-4">
