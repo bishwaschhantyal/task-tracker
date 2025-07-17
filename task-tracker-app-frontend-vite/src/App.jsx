@@ -75,7 +75,7 @@ function App() {
 	};
 
 	const deleteTask = (id) => {
-		const taskToDelete = tasks.find((task) => task.id === id);
+		const taskToDelete = tasks.find((task) => task._id === id);
 
 		if (!taskToDelete) {
 			setError("Task not found");
@@ -89,7 +89,7 @@ function App() {
 
 		deleteTasks(id)
 			.then(() => {
-				setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+				setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
 			})
 			.catch((error) => {
 				setError("Failed to delete task");
@@ -97,11 +97,13 @@ function App() {
 	};
 
 	const updateTask = (id, updatedTask) => {
+		console.log(id);
+
 		updateTasks(id, updatedTask)
-			.then((res) => {
+			.then(() => {
 				setTasks((prevTasks) =>
 					prevTasks.map((task) =>
-						task.id === id ? { ...task, text: updatedTask } : task
+						task._id === id ? { ...task, text: updatedTask } : task
 					)
 				);
 			})
@@ -115,12 +117,12 @@ function App() {
 			.then(() => {
 				setTasks((prevTasks) =>
 					prevTasks.map((task) =>
-						task.id === id ? { ...task, completed: !task.completed } : task
+						task._id === id ? { ...task, completed: !task.completed } : task
 					)
 				);
 			})
 			.catch(() => {
-				setError("Failed to delete task");
+				setError("Failed to completed task");
 			});
 	};
 

@@ -34,8 +34,10 @@ const RegisterForm = () => {
 			} else {
 				setServerError(response.error || "Registeration failed");
 			}
-		} catch (error) {
-			setServerError(error.error || "Registeration error occurred");
+		} catch (err) {
+			console.log(err);
+
+			setServerError(err?.error || "Registeration error occurred");
 		}
 	};
 

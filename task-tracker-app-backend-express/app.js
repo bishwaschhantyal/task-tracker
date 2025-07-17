@@ -4,7 +4,7 @@ const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 require("dotenv").config({ quiet: true });
-require("./config/passport"); // Google strategy config
+require("./config/passport");
 
 const app = express();
 

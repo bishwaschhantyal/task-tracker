@@ -2,15 +2,20 @@ const API_URL = "http://localhost:5000/api/auth";
 const GOOGLE_URL = "http://localhost:5000/api/auth/google/";
 
 const handleResponse = async (response) => {
-	const data = await response.json();
+	try {
+		const data = await response.json();
 
-	if (!response.ok) {
-		// This assumes your backend returns { error: "some message" }
-		const message = data.error || data.message || "Something went wrong";
-		throw new Error(message);
+		if (!response.ok) {
+			console.log(data);
+			throw data;
+		}
+
+		return data;
+	} catch (error) {
+		console.log(error);
+
+		throw { error: error?.error || "Something went wrong" };
 	}
-
-	return data;
 };
 
 export const loginUser = async (data) => {
@@ -32,6 +37,7 @@ export const registerUser = async (data) => {
 		},
 		body: JSON.stringify(data),
 	});
+
 	return handleResponse(response);
 };
 

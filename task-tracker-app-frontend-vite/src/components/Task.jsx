@@ -2,28 +2,28 @@ import Button from "./Button";
 import { useState, useEffect } from "react";
 
 const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
-	const [updatedTask, setUpdatedTask] = useState(task.text);
+	const [updatedTask, setUpdatedTask] = useState(task.title);
 	const [isEditing, setIsEditing] = useState(false);
 
 	useEffect(() => {
-		setUpdatedTask(task.text);
-	}, [task.text]);
+		setUpdatedTask(task.title);
+	}, [task.title]);
 
 	return (
 		<li
-			key={task.id}
+			key={task._id}
 			className="py-3 flex items-center justify-between">
 			<div className="flex items-center flex-grow dark:text-white">
 				<input
-					id={`checkbox-${task.id}`}
+					id={`checkbox-${task._id}`}
 					type="checkbox"
 					checked={task.completed}
-					onChange={() => onToggleComplete(task.id)}
+					onChange={() => onToggleComplete(task._id)}
 					className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
 				/>
 
 				<input
-					id={`input-${task.id}`}
+					id={`input-${task._id}`}
 					type="text"
 					value={updatedTask}
 					onChange={(e) => setUpdatedTask(e.target.value)}
@@ -53,7 +53,7 @@ const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
 						<Button
 							type="delete"
 							onClick={() => {
-								deleteTask(task.id);
+								deleteTask(task._id);
 							}}
 							isCompleted={task.completed}
 						/>
@@ -61,7 +61,7 @@ const Task = ({ task, deleteTask, onToggleComplete, updateTask }) => {
 				) : (
 					<button
 						onClick={() => {
-							updateTask(task.id, updatedTask);
+							updateTask(task._id, updatedTask);
 							setIsEditing(!isEditing);
 						}}
 						className="text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-1 ml-4 bg-green-600 hover:bg-green-800">
