@@ -1,5 +1,6 @@
-const API_URL = "http://localhost:5000/api/auth";
-const GOOGLE_URL = "http://localhost:5000/api/auth/google/";
+const API_URL = "https://task-tracker-api-xiig.onrender.com/api/auth";
+const GOOGLE_URL =
+	"https://task-tracker-api-xiig.onrender.com/api/auth/google/";
 
 const handleResponse = async (response) => {
 	try {

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/tasks";
+const API_URL = "https://task-tracker-api-xiig.onrender.com/api/tasks";
 
 export const fetchTasks = async (setIsLogin) => {
 	try {
