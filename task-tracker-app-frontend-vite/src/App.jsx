@@ -175,7 +175,7 @@ function App() {
 				</main>
 			) : (
 				<p className="container mx-auto py-8 flex-grow text-gray-700 text-xl dark:text-gray-500">
-					Please login to see and add task
+					Please login to see your task and add task
 				</p>
 			)}
 		</>
