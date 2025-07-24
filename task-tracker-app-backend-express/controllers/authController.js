@@ -107,5 +107,7 @@ exports.logoutUser = (req, res) => {
 exports.googleCallback = (req, res) => {
 	const user = req.user;
 	const token = generateToken(user);
-	res.redirect(`http://localhost:5173/auth/success?token=${token}`);
+	res.redirect(
+		`https://task-tracker-b.netlify.app/auth/success?token=${token}`
+	);
 };
