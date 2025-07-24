@@ -23,7 +23,7 @@ app.use("/api/tasks", taskRoutes);
 
 // Health check
 app.get("/", (req, res) => {
-	res.send("Backend is up and running");
+	res.send("Backend is up  perfectly running");
 });
 
 module.exports = app;
