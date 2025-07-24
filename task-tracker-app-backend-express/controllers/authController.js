@@ -100,7 +100,7 @@ exports.registerUser = async (req, res) => {
 
 exports.logoutUser = (req, res) => {
 	res.json({
-		message: "Logout successful. Please clear the token on the client side.",
+		message: "Logout successful",
 	});
 };
 
